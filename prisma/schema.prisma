@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(uuid())
+  email          String   @unique
+  name           String
+  phone          String
+  password_hash  String
+  img_perfil_url String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  turnos         Turno[]
+}
+
+model Turno {
+  id           String         @id @default(uuid())
+  date         DateTime
+  minute_start Int
+  userId       String
+  IdBarbero    String
+  User         User?          @relation(fields: [userId], references: [id])
+  Barbero      Barbero?       @relation(fields: [IdBarbero], references: [id])
+  services     TurnoService[]
+}
+
+model Service {
+  id     Int            @id @default(autoincrement())
+  name   String
+  price  Decimal        @db.Decimal(10, 2)
+  turnos TurnoService[]
+}
+
+model Barbero {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  name              String
+  phone             String
+  password_hash     String
+  img_perfil_url    String?
+  puesto            String
+  duracion_servicio String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  turnos            Turno[]
+  IdBarberia        String
+  Barberia          Barberia @relation(fields: [IdBarberia], references: [id])
+}
+
+model Barberia {
+  id         String    @id @default(uuid())
+  name       String
+  banner_url String?
+  ubicacion  String
+  barberos   Barbero[]
+  adminId    String
+  Admin      Admin     @relation(fields: [adminId], references: [id])
+}
+
+model Admin {
+  id            String     @id @default(uuid())
+  name          String
+  email         String     @unique
+  password_hash String
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  barberias     Barberia[]
+}
+
+model TurnoService {
+  id        String  @id @default(uuid())
+  turnoId   String
+  serviceId Int
+  Turno     Turno   @relation(fields: [turnoId], references: [id])
+  Service   Service @relation(fields: [serviceId], references: [id])
+}
