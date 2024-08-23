@@ -8,5 +8,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
   imports: [PrismaModule],
   controllers: [BarberiaController],
   providers: [BarberiaService],
+  exports: [BarberiaService],
 })
 export class BarberiaModule {}
