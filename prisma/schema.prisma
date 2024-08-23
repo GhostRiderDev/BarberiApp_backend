@@ -51,7 +51,7 @@ model Barbero {
   password_hash     String
   img_perfil_url    String?
   puesto            String
-  duracion_servicio String
+  duracion_servicio Int
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   turnos            Turno[]

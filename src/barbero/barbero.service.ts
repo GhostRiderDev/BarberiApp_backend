@@ -15,11 +15,13 @@ export class BarberoService {
   ) {}
 
   async AllBarberos() {
-    return this.prisma.barbero.findMany({ include: { Barberia: true } });
+    return this.prisma.barbero.findMany({
+      include: { Barberia: true, turnos: true },
+    });
   }
 
   async detailBarbero(id: string) {
-    const barbero = this.barberoById(id);
+    const barbero = await this.barberoById(id);
     if (!barbero) throw new NotFoundException('Barbero no encontrado');
     return barbero;
   }
@@ -114,6 +116,7 @@ export class BarberoService {
       },
       include: {
         Barberia: true,
+        turnos: true,
       },
     });
   }
