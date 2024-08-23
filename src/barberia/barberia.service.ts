@@ -10,9 +10,34 @@ export class BarberiaService {
     return this.prisma.barberia.findMany();
   }
 
+  async findBarberiaById(id: string) {
+    return this.prisma.barberia.findUnique({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   async createBarberia(barberiaDto: CreateBarberiaDto) {
     return this.prisma.barberia.create({
       data: barberiaDto,
+    });
+  }
+
+  async updateBarberia(id: string, barberiaDto: Partial<CreateBarberiaDto>) {
+    return this.prisma.barberia.update({
+      where: {
+        id: id,
+      },
+      data: { ...barberiaDto },
+    });
+  }
+
+  async deleteBarberia(id: string) {
+    return this.prisma.barberia.delete({
+      where: {
+        id: id,
+      },
     });
   }
 }

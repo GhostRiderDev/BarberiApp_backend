@@ -7,10 +7,12 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/createAdmin.dto';
+import { HashPasswordInterceptor } from 'src/interceptor/hashPassword.interceptor';
 
 @ApiTags('admin')
 @Controller('admin')
@@ -31,6 +33,7 @@ export class AdminController {
   }
 
   @Post()
+  @UseInterceptors(new HashPasswordInterceptor())
   createAdmin(@Body() createAdminDto: CreateAdminDto) {
     return this.adminService.createAdmin(createAdminDto);
   }

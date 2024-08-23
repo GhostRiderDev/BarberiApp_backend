@@ -9,7 +9,13 @@ export class AdminService {
   ) {}
 
   async findAdmins() {
-    return this.prisma.admin.findMany();
+    return this.prisma.admin.findMany({
+      select: {
+        id: true,
+        email: true,
+        name: true,
+      },
+    });
   }
 
   async findAdmin(id: string) {

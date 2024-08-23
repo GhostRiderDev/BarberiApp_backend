@@ -3,10 +3,11 @@ import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaModule } from 'src/prisma/prisma.module';
+import { HashPasswordInterceptor } from 'src/interceptor/hashPassword.interceptor';
 
 @Module({
   imports: [PrismaModule],
   controllers: [AdminController],
-  providers: [AdminService],
+  providers: [AdminService, HashPasswordInterceptor],
 })
 export class AdminModule {}
