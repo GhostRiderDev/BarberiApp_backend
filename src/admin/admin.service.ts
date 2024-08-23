@@ -9,14 +9,16 @@ export class AdminService {
   ) {}
 
   async createAdmin(createAdminDto: CreateAdminDto) {
-    console.log(createAdminDto);
+    const { password, ...rest } = createAdminDto;
     return this.prisma.admin.create({
-      data: { ...createAdminDto, password_hash: createAdminDto.password },
+      data: {
+        ...rest,
+        password_hash: password,
+      },
     });
   }
 
   async findAdmins() {
-    const raw = await this.prisma.$queryRaw`SELECT * FROM Admin`;
-    console.log('raw', raw);
+    return this.prisma.admin.findMany();
   }
 }

@@ -26,7 +26,6 @@ export class CreateAdminDto {
    * @minLength 8
    * @maxLength 50
    * @pattern (?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,50}
-   * @example 'password123
    */
   @IsNotEmpty()
   readonly password: string;
