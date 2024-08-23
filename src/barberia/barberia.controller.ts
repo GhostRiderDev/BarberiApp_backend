@@ -42,11 +42,10 @@ export class BarberiaController {
     @Body() barberiaToUpdate: Partial<CreateBarberiaDto>,
   ) {
     return this.barberiaService.updateBarberia(id, barberiaToUpdate);
-  }  
+  }
 
   @Delete(':id')
   async deleteBarberia(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.barberiaService.deleteBarberia(id);
   }
-
 }

@@ -3,10 +3,17 @@ import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
 import { BarberiaModule } from './barberia/barberia.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { BarberoModule } from './barbero/barbero.module';
 
 @Module({
-  imports: [AdminModule, UserModule, BarberiaModule, PrismaModule],
+  imports: [
+    PrismaModule,
+    AdminModule,
+    UserModule,
+    BarberiaModule,
+    BarberoModule,
+  ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
