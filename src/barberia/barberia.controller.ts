@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BarberiaService } from './barberia.service';
 import { CreateBarberiaDto } from './dto/barberia.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -16,8 +26,27 @@ export class BarberiaController {
     return this.barberiaService.findBarberias();
   }
 
+  @Get(':id')
+  async getBarberiaById(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.barberiaService.findBarberiaById(id);
+  }
+
   @Post()
   async createBarberia(@Body() barberiaToCreate: CreateBarberiaDto) {
     return this.barberiaService.createBarberia(barberiaToCreate);
   }
+
+  @Put(':id')
+  async updateBarberia(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() barberiaToUpdate: Partial<CreateBarberiaDto>,
+  ) {
+    return this.barberiaService.updateBarberia(id, barberiaToUpdate);
+  }  
+
+  @Delete(':id')
+  async deleteBarberia(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.barberiaService.deleteBarberia(id);
+  }
+
 }
