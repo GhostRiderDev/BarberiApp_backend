@@ -1,6 +1,8 @@
+import { Type } from 'class-transformer';
 import {
   IsEmail,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
   IsUrl,
@@ -43,9 +45,10 @@ export class CreateBarberoDto {
   @IsNotEmpty()
   puesto: string;
 
-  @IsString()
+  @Type(() => Number)
+  @IsNumber()
   @IsNotEmpty()
-  duracion_servicio: string;
+  duracion_servicio: number;
 
   @IsUUID()
   @IsNotEmpty()
