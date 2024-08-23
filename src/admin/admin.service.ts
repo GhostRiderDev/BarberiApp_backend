@@ -8,6 +8,14 @@ export class AdminService {
     private prisma: PrismaService,
   ) {}
 
+  async findAdmins() {
+    return this.prisma.admin.findMany();
+  }
+
+  async findAdmin(id: string) {
+    return this.prisma.admin.findUnique({ where: { id } });
+  }
+
   async createAdmin(createAdminDto: CreateAdminDto) {
     const { password, ...rest } = createAdminDto;
     return this.prisma.admin.create({
@@ -18,7 +26,14 @@ export class AdminService {
     });
   }
 
-  async findAdmins() {
-    return this.prisma.admin.findMany();
+  async updateAdmin(id: string, updateAdmin: Partial<CreateAdminDto>) {
+    const { password, ...rest } = updateAdmin;
+    return this.prisma.admin.update({
+      where: { id },
+      data: {
+        ...rest,
+        password_hash: password,
+      },
+    });
   }
 }
