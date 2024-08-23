@@ -1,7 +1,9 @@
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { BarberiaService } from './barberia.service';
 import { CreateBarberiaDto } from './dto/barberia.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('barberia')
 @Controller('barberia')
 export class BarberiaController {
   constructor(
