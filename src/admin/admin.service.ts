@@ -6,7 +6,7 @@ export class AdminService {
   constructor(
     @Inject(PrismaService)
     private prisma: PrismaService,
-  ) {}
+  ) { }
 
   async findAdmins() {
     return this.prisma.admin.findMany({
