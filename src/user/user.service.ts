@@ -5,37 +5,58 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class UserService {
-  constructor(private prismaService: PrismaService) { }
+  constructor(private prisma: PrismaService) { }
+
+
   async create(createUserDto: CreateUserDto) {
-    const newUser = await this.prismaService.user.create({
+    const { password, ...rest } = createUserDto;
+    return this.prisma.user.create({
       data: {
-        id: createUserDto.id,
-        email: createUserDto.email,
-        name: createUserDto.name,
-        phone: createUserDto.phone,
-        password_hash: createUserDto.password_hash,
-        img_perfil_url: createUserDto.img_perfil_url,
-
-      }
-
-    });
-
-    return newUser;
+        ...rest,
+        password_hash: password,
+      },
+    })
   }
 
   findAll() {
-    return this.prismaService.user.findMany();
+    return this.prisma.user.findMany(
+      {
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          phone: true,
+          img_perfil_url: true
+        }
+      }
+    );
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: string) {
+    return this.prisma.user.findUnique({ where: { id } });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  update(id: string, updateUserDto: UpdateUserDto) {
+    const { password, ...rest } = updateUserDto;
+    return this.prisma.user.update({
+      where: { id },
+      data: {
+        ...rest,
+        password_hash: password,
+      },
+    });
+
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  remove(id: string) {
+    try {
+      return this.prisma.user.delete({
+        where: { id }
+      })
+
+    } catch (error) {
+      return error.message;
+
+    }
   }
 }

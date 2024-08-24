@@ -8,7 +8,9 @@ import {
   IsUrl,
   IsUUID,
   Matches,
+  Max,
   MaxLength,
+  Min,
   MinLength,
 } from 'class-validator';
 
@@ -47,7 +49,8 @@ export class CreateBarberoDto {
 
   @Type(() => Number)
   @IsNumber()
-  @IsNotEmpty()
+  @Min(0)
+  @Max(300)
   duracion_servicio: number;
 
   @IsUUID()
