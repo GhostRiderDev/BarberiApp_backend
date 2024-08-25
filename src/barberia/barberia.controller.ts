@@ -19,7 +19,7 @@ export class BarberiaController {
   constructor(
     @Inject(BarberiaService)
     private readonly barberiaService: BarberiaService,
-  ) {}
+  ) { }
 
   @Get()
   async getBarberias() {

@@ -60,13 +60,15 @@ model Barbero {
 }
 
 model Barberia {
-  id         String    @id @default(uuid())
-  name       String
-  banner_url String?
-  ubicacion  String
-  barberos   Barbero[]
-  adminId    String
-  Admin      Admin     @relation(fields: [adminId], references: [id])
+  id           String    @id @default(uuid())
+  name         String
+  banner_url   String?
+  ubicacion    String
+  departamento String
+  ciudad       String
+  barberos     Barbero[]
+  adminId      String
+  Admin        Admin     @relation(fields: [adminId], references: [id])
 }
 
 model Admin {
