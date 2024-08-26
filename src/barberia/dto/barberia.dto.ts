@@ -30,6 +30,27 @@ export class CreateBarberiaDto {
   ubicacion: string;
 
   /**
+   * @example'Apartado'
+   * @description Ciudad de la barberia
+   */
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @MaxLength(50)
+  ciudad: string
+
+  /**
+   * @example 'Antioquia'
+   * @description Departamento de la barberia
+   */
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(2)
+  @MaxLength(50)
+  departamento: string
+
+  /**
    * @example 'https://example.com/banner.jpg'
    * @description URL de la imagen de la barber
    * @default 'https://example.com/default.jpg'

@@ -4,7 +4,7 @@ import { CreateBarberiaDto } from './dto/barberia.dto';
 
 @Injectable()
 export class BarberiaService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async findBarberias() {
     return this.prisma.barberia.findMany();
@@ -19,6 +19,17 @@ export class BarberiaService {
   }
 
   async createBarberia(barberiaDto: CreateBarberiaDto) {
+
+    const adminExists = await this.prisma.admin.findUnique({
+      where: {
+        id: barberiaDto.adminId
+      }
+    });
+
+    if (!adminExists) {
+      throw new Error('Admin does not exist');
+    }
+
     return this.prisma.barberia.create({
       data: barberiaDto,
     });
