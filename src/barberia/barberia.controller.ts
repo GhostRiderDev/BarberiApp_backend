@@ -30,9 +30,10 @@ export class BarberiaController {
   @Get('ubication')
   async getBarberiasByUbication(
     @Query('departamento') departamento: string,
-    @Query('ciudad') ciudad: string
+    @Query('ciudad') ciudad: string,
+    @Query('ubicacion') ubicacion: string,
   ) {
-    return this.barberiaService.findBarberiasByUbication(departamento, ciudad);
+    return this.barberiaService.findBarberiasByUbication(departamento, ciudad, ubicacion);
   }
 
   @Get(':id')

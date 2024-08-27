@@ -6,7 +6,7 @@ import { CreateBarberiaDto } from './dto/barberia.dto';
 export class BarberiaService {
   constructor(private prisma: PrismaService) { }
 
-  async findBarberiasByUbication(departamento: string, ciudad: string) {
+  async findBarberiasByUbication(departamento: string, ciudad: string, ubicacion: string) {
     return this.prisma.barberia.findMany({
       where: {
         departamento: {
@@ -17,6 +17,10 @@ export class BarberiaService {
           contains: ciudad.toLowerCase(),
           mode: 'insensitive',
         },
+        ubicacion: {
+          contains: ubicacion.toLowerCase(),
+          mode: 'insensitive'
+        }
       },
     });
 
