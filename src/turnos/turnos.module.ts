@@ -11,4 +11,4 @@ import { UserService } from 'src/user/user.service';
   controllers: [TurnosController],
   providers: [TurnosService],
 })
-export class BarberoModule {}
+export class TurnosModule {}
