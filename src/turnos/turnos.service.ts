@@ -4,11 +4,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { BarberoService } from 'src/barbero/barbero.service';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { ServicesService } from 'src/services/services.service';
 import { UserService } from 'src/user/user.service';
 import { CreateTurnoDto } from './dto/createTurnos.dto';
-import { User } from '@prisma/client';
 import { UpdateTurnosDto } from './dto/updateTurnos.dto';
 
 @Injectable()

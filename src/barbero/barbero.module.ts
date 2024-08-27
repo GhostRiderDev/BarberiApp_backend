@@ -8,5 +8,6 @@ import { BarberiaModule } from 'src/barberia/barberia.module';
   imports: [BarberiaModule, PrismaModule],
   controllers: [BarberoController],
   providers: [BarberoService],
+  exports: [BarberoService],
 })
 export class BarberoModule {}
