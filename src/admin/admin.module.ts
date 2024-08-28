@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaService } from 'src/datasource/prisma.service';
+import { PrismaModule } from 'src/datasource/prisma.module';
 import { HashPasswordInterceptor } from 'src/interceptor/hashPassword.interceptor';
 
 @Module({

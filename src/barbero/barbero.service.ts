@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/datasource/prisma.service';
 import { CreateBarberoDto } from './dto/createBarbero.dto';
 import { BarberiaService } from 'src/barberia/barberia.service';
 
@@ -119,5 +119,9 @@ export class BarberoService {
         turnos: true,
       },
     });
+  }
+
+  async findBarberoByEmail(email: string) {
+    return this.prisma.barbero.findFirst({ where: { email } });
   }
 }

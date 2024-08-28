@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { BarberoService } from 'src/barbero/barbero.service';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/datasource/prisma.service';
 import { ServicesService } from 'src/services/services.service';
 import { UserService } from 'src/user/user.service';
 import { CreateTurnoDto } from './dto/createTurnos.dto';

@@ -1,4 +1,4 @@
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaModule } from 'src/datasource/prisma.module';
 import { TurnosService } from './turnos.service';
 import { TurnosController } from './turnos.controller';
 import { Module } from '@nestjs/common';

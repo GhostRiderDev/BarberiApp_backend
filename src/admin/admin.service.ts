@@ -1,4 +1,4 @@
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/datasource/prisma.service';
 import { CreateAdminDto } from './dto/createAdmin.dto';
 import { Inject } from '@nestjs/common';
 
@@ -6,7 +6,7 @@ export class AdminService {
   constructor(
     @Inject(PrismaService)
     private prisma: PrismaService,
-  ) { }
+  ) {}
 
   async findAdmins() {
     return this.prisma.admin.findMany({
@@ -41,5 +41,9 @@ export class AdminService {
         password_hash: password,
       },
     });
+  }
+
+  async findAdminByEmail(email: string) {
+    return this.prisma.admin.findFirst({ where: { email } });
   }
 }

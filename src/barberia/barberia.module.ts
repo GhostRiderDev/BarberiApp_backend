@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { BarberiaController } from './barberia.controller';
 import { BarberiaService } from './barberia.service';
-import { PrismaModule } from 'src/prisma/prisma.module';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaModule } from 'src/datasource/prisma.module';
+import { PrismaService } from 'src/datasource/prisma.service';
 
 @Module({
   imports: [PrismaModule],
