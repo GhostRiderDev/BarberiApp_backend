@@ -5,6 +5,7 @@ import { BarberiaModule } from './barberia/barberia.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { BarberoModule } from './barbero/barbero.module';
 import { ServicesModule } from './services/services.module';
+import { TurnosModule } from './turnos/turnos.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ServicesModule } from './services/services.module';
     BarberiaModule,
     BarberoModule,
     ServicesModule,
+    TurnosModule,
   ],
   controllers: [],
   providers: [],

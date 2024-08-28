@@ -37,7 +37,7 @@ model Turno {
 }
 
 model Service {
-  id     Int            @id @default(autoincrement())
+  id     String         @id @default(uuid())
   name   String
   price  Decimal        @db.Decimal(10, 2)
   turnos TurnoService[]
@@ -84,7 +84,7 @@ model Admin {
 model TurnoService {
   id        String  @id @default(uuid())
   turnoId   String
-  serviceId Int
+  serviceId String
   Turno     Turno   @relation(fields: [turnoId], references: [id])
   Service   Service @relation(fields: [serviceId], references: [id])
 }
