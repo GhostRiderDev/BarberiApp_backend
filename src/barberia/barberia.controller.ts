@@ -8,6 +8,7 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { BarberiaService } from './barberia.service';
 import { CreateBarberiaDto } from './dto/barberia.dto';
@@ -24,6 +25,15 @@ export class BarberiaController {
   @Get()
   async getBarberias() {
     return this.barberiaService.findBarberias();
+  }
+
+  @Get('ubication')
+  async getBarberiasByUbication(
+    @Query('departamento') departamento: string,
+    @Query('ciudad') ciudad: string,
+    @Query('ubicacion') ubicacion: string,
+  ) {
+    return this.barberiaService.findBarberiasByUbication(departamento, ciudad, ubicacion);
   }
 
   @Get(':id')
