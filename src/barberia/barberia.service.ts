@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/datasource/prisma.service';
 import { CreateBarberiaDto } from './dto/barberia.dto';
 
 @Injectable()
 export class BarberiaService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findBarberiasByUbication(departamento: string, ciudad: string, ubicacion: string) {
     return this.prisma.barberia.findMany({
@@ -40,11 +40,10 @@ export class BarberiaService {
   }
 
   async createBarberia(barberiaDto: CreateBarberiaDto) {
-
     const adminExists = await this.prisma.admin.findUnique({
       where: {
-        id: barberiaDto.adminId
-      }
+        id: barberiaDto.adminId,
+      },
     });
 
     if (!adminExists) {

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaModule } from 'src/datasource/prisma.module';
 import { BarberoService } from './barbero.service';
 import { BarberoController } from './barbero.controller';
 import { BarberiaModule } from 'src/barberia/barberia.module';
