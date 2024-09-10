@@ -13,6 +13,7 @@ import {
 import { BarberiaService } from './barberia.service';
 import { CreateBarberiaDto } from './dto/barberia.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { NormalizeStringPipe } from 'src/utils/pipes/NormalizeStringPipe';
 
 @ApiTags('barberia')
 @Controller('barberia')
@@ -20,7 +21,7 @@ export class BarberiaController {
   constructor(
     @Inject(BarberiaService)
     private readonly barberiaService: BarberiaService,
-  ) { }
+  ) {}
 
   @Get()
   async getBarberias() {
@@ -29,11 +30,10 @@ export class BarberiaController {
 
   @Get('ubication')
   async getBarberiasByUbication(
-    @Query('departamento') departamento: string,
-    @Query('ciudad') ciudad: string,
-    @Query('ubicacion') ubicacion: string,
+    @Query('departamento', NormalizeStringPipe) departamento: string,
+    @Query('ciudad', NormalizeStringPipe) ciudad: string,
   ) {
-    return this.barberiaService.findBarberiasByUbication(departamento, ciudad, ubicacion);
+    return this.barberiaService.findBarberiasByUbication(departamento, ciudad);
   }
 
   @Get(':id')
