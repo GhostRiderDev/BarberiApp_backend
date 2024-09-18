@@ -23,13 +23,17 @@ export class AdminService {
   }
 
   async createAdmin(createAdminDto: CreateAdminDto) {
-    const { password, ...rest } = createAdminDto;
-    return this.prisma.admin.create({
-      data: {
-        ...rest,
-        password_hash: password,
-      },
-    });
+    try {
+      const { password, ...rest } = createAdminDto;
+      return this.prisma.admin.create({
+        data: {
+          ...rest,
+          password_hash: password,
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
   }
 
   async updateAdmin(id: string, updateAdmin: Partial<CreateAdminDto>) {

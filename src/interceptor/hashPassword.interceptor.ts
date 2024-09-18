@@ -22,7 +22,6 @@ export class HashPasswordInterceptor implements NestInterceptor {
         }),
       );
     }
-    console.log(request.body);
     return next.handle();
   }
 }
