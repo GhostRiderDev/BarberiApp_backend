@@ -44,10 +44,4 @@ export class CreateUserDto {
     @IsNotEmpty()
     readonly password: string
 
-    @IsString()
-    readonly img_perfil_url: string
-
-
-
-
 }

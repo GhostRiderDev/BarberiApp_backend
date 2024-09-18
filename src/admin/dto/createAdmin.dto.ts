@@ -1,7 +1,12 @@
-import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsPhoneNumber,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateAdminDto {
-
   /**
    * @example 'Juan'
    * @description Nombre del administrador
@@ -29,4 +34,12 @@ export class CreateAdminDto {
    */
   @IsNotEmpty()
   readonly password: string;
+
+  /**
+   * @example '3023456543'
+   * @description Teléfono del administrador
+   */
+  @IsNotEmpty()
+  @IsPhoneNumber('CO')
+  readonly phone: string;
 }

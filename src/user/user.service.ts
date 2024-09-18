@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma.service';
 import { BarberoService } from 'src/barbero/barbero.service';
 import { AdminService } from 'src/admin/admin.service';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -15,20 +16,28 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     const { password, ...rest } = createUserDto;
-    const user = await this.findByEmail(createUserDto.email);
-    const barber = await this.barberoService.findBarberoByEmail(
-      createUserDto.email,
-    );
-    const admin = await this.adminService.findAdminByEmail(createUserDto.email);
-    if (user || barber || admin) {
-      throw new ConflictException('Email already exists');
+    const isRegistered = await this.alreadyExist(createUserDto.email);
+    if (isRegistered) {
+      throw new ConflictException('User already exists');
     }
-    return this.prisma.user.create({
+    const userDB = await this.prisma.user.create({
       data: {
         ...rest,
         password_hash: password,
       },
     });
+    const { password_hash, ...userToReturn } = userDB;
+    return userToReturn;
+  }
+
+  async alreadyExist(email: string) {
+    const user = await this.findByEmail(email);
+    const barber = await this.barberoService.findBarberoByEmail(email);
+    const admin = await this.adminService.findAdminByEmail(email);
+    if (user || barber || admin) {
+      return true;
+    }
+    return false;
   }
 
   async findByEmail(email: string) {
